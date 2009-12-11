@@ -9,17 +9,19 @@ get '/' do
 
   client = Savon::Client.new url
   
-  "<p>P&aacute;gina de testes dos servi&ccedil;os do grupo 45</p>" + client.wsdl.soap_actions.keys.to_s +
+  "<p>P&aacute;gina de testes dos servi&ccedil;os do grupo 45</p>" +
+  "<ul>" +
   
-  client.wsdl.soap_actions.keys.each do |key|
-    key.to_s + "<br />" + "TATATATA"
-  end.to_s +
-=begin
-=end
-  '<br /><br />'+
-  '<a href="servico/hello_world">Hello World</a><br />' '<a href="servico/inserir_pontuacao">Inserir Pontuacao</a>'
+  client.wsdl.soap_actions.inject("") do |res, action|
+    res +
+    "    <li>"+action[1].values[1] + "()"+
+    "      <ul><a href='API/xml/#{action[0]}'>xml</a><br /></ul>" +
+    "      <ul><a href='API/yaml/#{action[0]}'>yaml</a></ul>" +
+    "    </li>" +
+    "<br />"
+  end + '</ul>'
 end
 
-get '/servico/:nome' do
-  (Savon::Client.new url).send(params[:nome]).to_xml
+get '/API/:formato/:nome' do
+  (Savon::Client.new url).send(params[:nome]).send("to_"+params[:formato])
 end
