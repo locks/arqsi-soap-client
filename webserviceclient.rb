@@ -9,7 +9,7 @@ get '/' do
 
   client = Savon::Client.new url
   
-  "<p>P&aacute;gina de testes dos serviços do grupo 45</p>" + client.wsdl.soap_actions.keys.to_s +
+  "<p>P&aacute;gina de testes dos servi&ccedil;os do grupo 45</p>" + client.wsdl.soap_actions.keys.to_s +
   
   client.wsdl.soap_actions.keys.each do |key|
     key.to_s + "<br />" + "TATATATA"
