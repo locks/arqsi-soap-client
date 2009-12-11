@@ -3,13 +3,9 @@ require 'savon'
 require 'sinatra'
 
 Savon::SOAP.version = 2
-
-client = Savon::Client.new "http://dot.dei.isep.ipp.pt/060516/dir1/srvARQSI45.asmx?wsdl"
-resposta = client.hello_world
-
-puts "\n\n"
-puts resposta
+url = "http://dot.dei.isep.ipp.pt/060516/dir1/srvARQSI45.asmx?wsdl"
 
 get '/' do
+  Savon::Client.new url.hello_world.to_s
   resposta.to_s
 end
