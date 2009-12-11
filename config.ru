@@ -1,3 +1,3 @@
-require 'hello'
+require 'webserviceclient'
 
 run Sinatra::Application
