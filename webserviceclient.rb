@@ -6,7 +6,6 @@ Savon::SOAP.version = 2
 url = "http://dot.dei.isep.ipp.pt/060516/dir1/srvARQSI45.asmx?wsdl"
 
 get '/' do
-
   client = Savon::Client.new url
   
   "<p>P&aacute;gina de testes dos servi&ccedil;os do grupo 45</p>" +
@@ -14,11 +13,11 @@ get '/' do
   
   client.wsdl.soap_actions.inject("") do |res, action|
     res +
-    "    <li>"+action[1].values[1] + "()"+
-    "      <ul><a href='API/xml/#{action[0]}'>xml</a><br /></ul>" +
-    "      <ul><a href='API/yaml/#{action[0]}'>yaml</a></ul>" +
-    "    </li>" +
-    "<br />"
+    "  <li>" + action[1].values[1] + "()" +
+    "    <ul><a href='API/xml/#{action[0]}'>xml</a></ul>" +
+    "    <ul><a href='API/yaml/#{action[0]}'>yaml</a></ul>" +
+    "  </li>"+
+    "  <br />"
   end + '</ul>'
 end
 
