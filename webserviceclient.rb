@@ -13,7 +13,7 @@ get '/' do
   
   client.wsdl.soap_actions.inject("") do |res, action|
     res +
-    "  <li>" + action[1].values[1] + "()" +
+    "  <li>" + action[1].values[1] +
     "    <ul><a href='API/xml/#{action[0]}'>xml</a></ul>" +
     "    <ul><a href='API/yaml/#{action[0]}'>yaml</a></ul>" +
     "  </li>"+
