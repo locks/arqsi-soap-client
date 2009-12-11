@@ -7,10 +7,10 @@ servico = "http://dot.dei.isep.ipp.pt/060516/dir1/srvARQSI45.asmx"
 
 get '/' do
   client = Savon::Client.new url+"?wsdl"
-  
+
   "<p>P&aacute;gina de testes dos servi&ccedil;os do grupo 45</p>" +
   "<ul>" +
-  
+
   client.wsdl.soap_actions.inject("") do |res, action|
     res +
     "  <li>" + action[1].values[1] +
