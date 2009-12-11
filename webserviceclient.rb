@@ -6,7 +6,7 @@ Savon::SOAP.version = 2
 servico = "http://dot.dei.isep.ipp.pt/060516/dir1/srvARQSI45.asmx"
 
 get '/' do
-  client = Savon::Client.new url+"?wsdl"
+  client = Savon::Client.new(url+"?wsdl")
 
   "<p>P&aacute;gina de testes dos servi&ccedil;os do grupo 45</p>" +
   "<ul>" +
