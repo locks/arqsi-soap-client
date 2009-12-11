@@ -9,15 +9,19 @@ get '/' do
   client = Savon::Client.new servico
 
   "<p>P&aacute;gina de testes dos servi&ccedil;os do grupo 45</p>" +
-  "<ul>" +
+  "<ol>" +
 
   client.wsdl.soap_actions.inject("") do |res, action|
-    res + action[1].values[1] +
-    "    <li><a href='API/xml/#{action[0]}'>xml</a></li>" +
-    "    <li><a href='API/yaml/#{action[0]}'>yaml</a></li>" +
-    "  </li>"+
+    res +
+    "  <li>" + action[1].values[1] +
+    "    <ul>" +
+    "      <li><a href='API/xml/#{action[0]}'>xml</a></li>" +
+    "      <li><a href='API/yaml/#{action[0]}'>yaml</a></li>" +
+    "    </ul" +
+    "  </li" +
     "  <br />"
-  end + '</ul>'
+  end +
+  '</ol>'
 end
 
 get '/API/:formato/:nome' do
