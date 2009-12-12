@@ -31,7 +31,13 @@ get '/API/:formato/hello_world' do
     sapo.body = { :nome => "fdfds" }
   end.send("to_"+params[:formato])
 end
-
+get '/API/:formato/inserir_pontuacao' do
+  cliente = Savon::Client.new servico
+  
+  resposta = cliente.inserir_pontuacao do |sapo|
+    sapo.body = { :mapa => 3, :jogador => 4, :res => 1500 }
+  end.send("to_"+params[:formato])
+end
 get '/API/:formato/:nome' do
   (Savon::Client.new servico).send(params[:nome]).send("to_"+params[:formato])
 end
