@@ -25,10 +25,12 @@ get '/' do
 end
 
 get '/API/:formato/hello_world' do
-  (Savon::Client.new servico).hello_world.send("to_"+params[:formato]) do |soap|
+  cliente = Savon::Client.new servico
+  
+  resposta = cliente.hello_world do |soap|
     soap.body = {
       :nome => "joão"
-    }
+    }.send("to_"+params[:formato])
   end
 end
 
