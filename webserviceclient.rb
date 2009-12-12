@@ -27,8 +27,9 @@ end
 get '/API/:formato/hello_world' do
   (Savon::Client.new servico).hello_world.send("to_"+params[:formato]) do |soap|
     soap.body = {
-      :nome => "joão";
+      :nome => "joão"
     }
+  end
 end
 
 get '/API/:formato/:nome' do
