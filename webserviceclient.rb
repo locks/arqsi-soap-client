@@ -24,6 +24,13 @@ get '/' do
   '</ol>'
 end
 
+get '/API/:formato/hello_world' do
+  (Savon::Client.new servico).hello_world.send("to_"+params[:formato]) do |soap|
+    soap.body = {
+      :nome => "joão";
+    }
+end
+
 get '/API/:formato/:nome' do
   (Savon::Client.new servico).send(params[:nome]).send("to_"+params[:formato])
 end
