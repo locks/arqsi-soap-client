@@ -27,13 +27,11 @@ end
 get '/API/:formato/hello_world' do
   cliente = Savon::Client.new servico
   
-  resposta = cliente.hello_world do |soap|
-    soap.body = {
-      :nome => "joão"
-    }
-  end
+  resposta = cliente.hello_world do |sapo|
+    sapo.body = "<nome>ricardo</id>"
+  end.send("to_"+params[:formato])
   
-  resposta.send("to_"+params[:formato])
+##  cliente.wsdl.soap_actions.to_s
 end
 
 get '/API/:formato/:nome' do
