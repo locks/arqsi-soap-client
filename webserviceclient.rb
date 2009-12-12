@@ -3,7 +3,7 @@ require 'savon'
 require 'sinatra'
 
 Savon::SOAP.version = 2
-servico = "http://dot.dei.isep.ipp.pt/060516/dir1/srvARQSI45.asmx?wsdl"
+servico = "http://dot.dei.isep.ipp.pt/060516/dir3/srvARQSI45.asmx?wsdl"
 
 get '/' do
   client = Savon::Client.new servico
