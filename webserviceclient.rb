@@ -2,7 +2,7 @@ require 'rubygems'
 require 'savon'
 require 'sinatra'
 
-Savon::SOAP.version = 2
+#Savon::SOAP.version = 2
 servico = "http://dot.dei.isep.ipp.pt/060516/dir3/srvARQSI45.asmx?wsdl"
 
 get '/' do
@@ -28,10 +28,8 @@ get '/API/:formato/hello_world' do
   cliente = Savon::Client.new servico
   
   resposta = cliente.hello_world do |sapo|
-    sapo.body = "<nome>ricardo</id>"
+    sapo.body = { :nome => "fdfds" }
   end.send("to_"+params[:formato])
-  
-##  cliente.wsdl.soap_actions.to_s
 end
 
 get '/API/:formato/:nome' do
