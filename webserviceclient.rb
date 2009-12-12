@@ -30,8 +30,10 @@ get '/API/:formato/hello_world' do
   resposta = cliente.hello_world do |soap|
     soap.body = {
       :nome => "joão"
-    }.send("to_"+params[:formato])
+    }
   end
+  
+  resposta.send("to_"+params[:formato])
 end
 
 get '/API/:formato/:nome' do
