@@ -66,8 +66,7 @@ post '/API/:formato/inserir_pontuacao' do
   end
   
   if (resposta)
-    "Opera&ccedil;&atilde;o com sucesso" +
-    "<br />" +
+    "<p>Opera&ccedil;&atilde;o com sucesso</p>" +
     '<a href="/">voltar</a>'
   else
     redirect '/erro'
