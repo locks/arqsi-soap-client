@@ -24,9 +24,9 @@ get '/' do
   "</ol>"
 end
 
-get '/API/:formato/hello_world/:nome' do
+get '/API/:formato/hello_world/:user' do
   resposta = cliente.hello_world do |sapo|
-    sapo.body = { :nome => params[:nome].to_s }
+    sapo.body = { :nome => params[:user] }
   end
   
   resposta.send("to_"+params[:formato])
@@ -42,47 +42,35 @@ get '/API/:formato/inserir_pontuacao' do
     <br />
     <input type="submit" value="submit" />
   </form>'
-=begin
-  resposta = cliente.inserir_pontuacao do |sapo|
-    sapo.body = { :mapa => 3, :jogador => 4, :res => 1500 }
-=end
-  
-##  redirect (resposta.soap_fault?) ? '/erro' : '/'
 end
 
 get '/teste' do
   resposta = cliente.inserir_pontuacao do |sapo|
     sapo.body = { :mapa => 50, :jogador => 50, :res => 50 }
   end
-  
-  if (resposta.soap_fault? == true)
+
+  if (resposta)
     redirect '/erro'
   else
-    "Operação com sucesso" +
-    "<br />" +
-    '<a href="/">voltar</a>'
+    redirect '/'
   end
 end
 
 post '/API/:formato/inserir_pontuacao' do
-  params[:m] + "<br />" +
-  params[:j] + "<br />" +
-  params[:r] +
-=begin
   resposta = cliente.inserir_pontuacao do |sapo|
     sapo.body = {
-      :mapa    => params[:m],
-      :jogador => params[:j],
-      :res     => params[:r]
+      :mapa    => params[:m].to_i,
+      :jogador => params[:j].to_i,
+      :res     => params[:r].to_i
     }
-=end
+  end
   
-  if (resposta.soap_fault? == true)
-    redirect '/erro'
-  else
-    "Operação com sucesso" +
+  if (resposta)
+    "Opera&ccedil;&atilde;o com sucesso" +
     "<br />" +
     '<a href="/">voltar</a>'
+  else
+    redirect '/erro'
   end
 end  
 
@@ -91,7 +79,7 @@ get '/API/:formato/:nome' do
 end
 
 get '/erro' do
-  "<p>Houve um erro, impossível concretizar pedido.</p>" +
+  "<p>Houve um erro, imposs&iacute;vel concretizar pedido.</p>" +
 
   '<a href="/">voltar</a>'
 end
