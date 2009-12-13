@@ -2,11 +2,8 @@ require 'rubygems'
 require 'savon'
 require 'sinatra'
 
-def cliente
-  servico = "http://dot.dei.isep.ipp.pt/060516/dir3/srvARQSI45.asmx?wsdl"
-  
-  Savon::Client.new servico
-end
+servico = "http://dot.dei.isep.ipp.pt/060516/dir3/srvARQSI45.asmx?wsdl"
+cliente = Savon::Client.new servico
 
 get '/' do
   "<p>P&aacute;gina de testes dos servi&ccedil;os do grupo 45</p>" +
