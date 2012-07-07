@@ -1,3 +1,3 @@
-require 'webserviceclient'
+require './webserviceclient'
 
 run Sinatra::Application

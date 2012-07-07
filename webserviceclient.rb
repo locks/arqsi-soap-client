@@ -9,16 +9,15 @@ get '/' do
   "<p>P&aacute;gina de testes dos servi&ccedil;os do grupo 45</p>" +
   "<ol>" +
   
-  cliente.wsdl.soap_actions.inject("") do |res, action|
-    res +
+  cliente.wsdl.soap_actions.map do |action|
     "  <li>" + action.to_s +
     "    <ul>" +
     "      <li><a href='API/xml/#{action}'>xml</a></li>" +
     "      <li><a href='API/yaml/#{action}'>yaml</a></li>" +
     "    </ul" +
-    "  </li" +
-    "  <br />"
-  end +
+    "  </li>"
+  end.join("<br />") +
+  
   "</ol>"
 end
 
@@ -35,7 +34,7 @@ get '/API/:formato/inserir_pontuacao' do
 end
 
 post '/API/:formato/inserir_pontuacao' do
-  resposta = cliente.inserir_pontuacao do |sapo|
+  resposta = cliente.request(:inserir_pontuacao) do |sapo|
     sapo.body = {
       :mapa    => params[:m].to_i,
       :jogador => params[:j].to_i,
@@ -53,5 +52,5 @@ post '/API/:formato/inserir_pontuacao' do
 end  
 
 get '/API/:formato/:nome' do
-  cliente.send(params[:nome]).send("to_"+params[:formato])
+  cliente.request(params[:nome]).send("to_"+params[:formato])
 end

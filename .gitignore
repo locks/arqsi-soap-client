@@ -1,1 +1,5 @@
 *.DS_Store
+tmp
+
+# bundler
+Gemfile.lock
